@@ -5022,8 +5022,38 @@ PrefabInstance:
       propertyPath: bloom_handler
       value: 
       objectReference: {fileID: 727220650}
+    - target: {fileID: 3478960220982214488, guid: 605fa4626aab9fc448364f54e4b2a311,
+        type: 3}
+      propertyPath: InventoryItemGraphics.Array.data[2]
+      value: 
+      objectReference: {fileID: 3478960218962954853}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 605fa4626aab9fc448364f54e4b2a311, type: 3}
+--- !u!1 &3478960218962954853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5136118116206515478, guid: 605fa4626aab9fc448364f54e4b2a311,
+    type: 3}
+  m_PrefabInstance: {fileID: 3478960218962954852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3478960218962954854
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3478960218962954853}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4c34707c70a1fe4bb0b617a71175710, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8170339385746739041
 PrefabInstance:
   m_ObjectHideFlags: 0
