@@ -15,6 +15,7 @@ public class Item : ScriptableObject
 
     public int noise;
     public bool loud;
+    public ItemType item_type;
 
     [HideInInspector]
     public GameObject graphic;
@@ -32,4 +33,11 @@ public class Item : ScriptableObject
     {
         
     }
+}
+public enum ItemType
+{
+    Default,
+    Weapon,
+    Lock,
+    Tool
 }

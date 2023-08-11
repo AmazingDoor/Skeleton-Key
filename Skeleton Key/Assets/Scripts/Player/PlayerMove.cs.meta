@@ -15,7 +15,7 @@ MonoImporter:
   - shot_gun_shell: {fileID: 11400000, guid: 1013238a17701554eaa1c6431060a22c, type: 2}
   - Hud: {instanceID: 0}
   executionOrder: 0
-  icon: {instanceID: 0}
+  icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

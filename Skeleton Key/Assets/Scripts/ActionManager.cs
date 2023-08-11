@@ -46,7 +46,8 @@ public class ActionManager : MonoBehaviour
         {
             if(playerMove.getInInventory()) { return; }
             if(hotbar.getActiveItem() == null) { return; }
-            hotbar.getInvItem().GetComponent<ItemActionHandler>().leftClickAction(bloom_handler, cam, handler);
+            hotbar.getInvItem().GetComponent<ItemActionHandler>().leftClickAction(bloom_handler, cam, handler, inv);
+            
         }
 
 

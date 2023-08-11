@@ -18,6 +18,7 @@ MonoBehaviour:
   x_offset: 50
   noise: 150
   loud: 1
+  item_type: 1
   graphic: {fileID: 0}
   actionHandler: {fileID: 0}
   max_ammo: 2

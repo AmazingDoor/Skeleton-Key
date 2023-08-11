@@ -13,6 +13,7 @@ TagManager:
   - revolver_bullet
   - lock_pick
   - shot_gun_shell
+  - lock
   layers:
   - Default
   - TransparentFX

@@ -22,6 +22,16 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(transform.position.x + item.x_offset, transform.position.y, transform.position.z), Quaternion.Euler(1, 1, 1));
             GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
         }
+        switch(item.item_type)
+        {
+            case ItemType.Lock:
+                LockItem lock_item = gameObject.AddComponent<LockItem>();
+                lock_item.item = item;
+                break;
+            case ItemType.Default: break;
+            case ItemType.Weapon: break;
+            case ItemType.Tool: break;
+        }
         
     }
 

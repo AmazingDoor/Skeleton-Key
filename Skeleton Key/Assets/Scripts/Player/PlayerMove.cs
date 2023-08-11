@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     public WeaponItem revolver;
     public Item lock_pick;
     public Item shot_gun_shell;
+    public Item lock_item;
 
     public Canvas Hud;
     
@@ -80,9 +81,14 @@ public class PlayerMove : MonoBehaviour
                 for (int num = 0; num < hits.Length; num++)
                 {
                     RaycastHit hit = hits[num];
+
                     if (hit.transform.tag == "bullet")
                     {
                         inv.addItem(revolver_bullet);
+                    }
+                    if(hit.transform.CompareTag("lock"))
+                    {
+                        inv.addItem(lock_item) ;
                     }
                     if(hit.transform.tag == "shot_gun")
                     {
@@ -110,7 +116,12 @@ public class PlayerMove : MonoBehaviour
 
                     if(hit.transform.CompareTag("door"))
                     {
-                        hit.transform.GetComponent<BoxCollider>().isTrigger = !hit.transform.GetComponent<BoxCollider>().isTrigger;
+                        if(hit.transform.GetComponent<Door>())
+                        {
+                            Door door = hit.transform.GetComponent<Door>();
+                            door.toggleOpen();
+                        }
+                        
                     }
                     
                 }
