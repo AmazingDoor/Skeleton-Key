@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b6ef134fe7096469d063c4b41c11a5, type: 3}
+  m_Name: Shot Gun
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 2cfbf6619eb047545a425e8a31732c83, type: 3}
+  stackable: 0
+  large: 1
+  x_offset: 50
+  noise: 150
+  loud: 1
+  graphic: {fileID: 0}
+  actionHandler: {fileID: 0}
+  max_ammo: 2
+  reload_time: 3
+  shots: 6
+  shot_distance: 10
+  fire_delay_time: 0.5
+  bloom: 130
+  ammo_type: {fileID: 11400000, guid: 1013238a17701554eaa1c6431060a22c, type: 2}
