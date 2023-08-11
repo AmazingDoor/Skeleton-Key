@@ -27,9 +27,6 @@ public class Weapon : ItemActionHandler
     float bloom;
 
     Animator animator;
-
-    string[] penetratable = new string[] { "monster", "Player", "door", "lock" };
-
     private void Start()
     {
         loaded = item.max_ammo;
@@ -110,7 +107,6 @@ public class Weapon : ItemActionHandler
         {
             for (int s = 0; s < shots; s++)
             {
-                Debug.Log("shoot");
                 float rand_x = Random.Range(-bloom_handler.getMax(), bloom_handler.getMax()) / 800;
                 float rand_y = Random.Range(-bloom_handler.getMax(), bloom_handler.getMax()) / 800;
                 float rand_z = Random.Range(-bloom_handler.getMax(), bloom_handler.getMax()) / 800;
@@ -137,7 +133,7 @@ public class Weapon : ItemActionHandler
     //returns true if can be shot through
     bool doLogic(RaycastHit hit)
     {
-        //Debug.Log(hit.transform.tag);
+        //Debug.Log(hit.transform.name);
         switch (hit.transform.tag)
         {
             case "monster":
@@ -156,8 +152,10 @@ public class Weapon : ItemActionHandler
                 return true;
             case "door":
                 return true;
-            case "lock":
+            case "lock_on_door":
                 //break lock
+                Door door = hit.transform.GetComponentInParent<Door>();
+                door.Unlock();
                 return true;
             default:
                 return false;
@@ -170,15 +168,12 @@ public class Weapon : ItemActionHandler
 
         if (Physics.Raycast(ray, out hit, max_distance - dist))
         {
-            if (penetratable.Contains(hit.transform.tag))
+            if (doLogic(hit) == true)
             {
-                if (doLogic(hit) == true)
-                {
 
-                    //Instantiate(test_cube, hit.point, Quaternion.identity);
-                    Ray new_ray = new Ray(new Vector3(hit.point.x + (offset_count * dir.x), hit.point.y + (offset_count * dir.y), hit.point.z + (offset_count * dir.z)), dir);
-                    findNextHit(new_ray, dir, hit.distance, max_distance);
-                }
+                //Instantiate(test_cube, hit.point, Quaternion.identity);
+                Ray new_ray = new Ray(new Vector3(hit.point.x + (offset_count * dir.x), hit.point.y + (offset_count * dir.y), hit.point.z + (offset_count * dir.z)), dir);
+                findNextHit(new_ray, dir, hit.distance, max_distance);
             }
         }
     }

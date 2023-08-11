@@ -50,8 +50,22 @@ public class ActionManager : MonoBehaviour
             
         }
 
+        if (Input.GetMouseButton(0))
+        {
+            if (playerMove.getInInventory()) { return; }
+            if (hotbar.getActiveItem() == null) { return; }
+            hotbar.getInvItem().GetComponent<ItemActionHandler>().leftClickHoldAction(bloom_handler, cam, handler, inv);
+        }
 
-        if(Input.GetKeyDown(KeyCode.R) && reload_time < 1)
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (playerMove.getInInventory()) { return; }
+            if (hotbar.getActiveItem() == null) { return; }
+            hotbar.getInvItem().GetComponent<ItemActionHandler>().cancelLeftClick();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.R) && reload_time < 1)
         {
             if (playerMove.getInInventory()) { return; }
             if (hotbar.getActiveItem() == null) { return; }

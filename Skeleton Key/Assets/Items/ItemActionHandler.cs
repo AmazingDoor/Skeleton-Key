@@ -21,11 +21,22 @@ public abstract class ItemActionHandler : MonoBehaviour
         leftClickAction(bloom_handler, cam, handler);
         return;
     }
+
+    public virtual void leftClickHoldAction(BloomHandler bloom_handler, Camera cam, NoiseHandler handler, NewPlayerInventory inventory)
+    {
+        return;
+    }
+
     public virtual void leftClickAction(BloomHandler bloom_handler, Camera cam, NoiseHandler handler)
     {
         return;
     }
     public virtual void leftClickAction()
+    {
+        return;
+    }
+
+    public virtual void cancelLeftClick()
     {
         return;
     }

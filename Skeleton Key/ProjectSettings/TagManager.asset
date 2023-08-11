@@ -14,6 +14,7 @@ TagManager:
   - lock_pick
   - shot_gun_shell
   - lock
+  - lock_on_door
   layers:
   - Default
   - TransparentFX

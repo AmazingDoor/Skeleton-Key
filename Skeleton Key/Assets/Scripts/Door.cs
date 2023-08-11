@@ -7,6 +7,9 @@ public class Door : MonoBehaviour
     BoxCollider collider;
     bool open;
     public bool locked;
+
+    public MeshRenderer graphics;
+    public BoxCollider lock_collider;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +28,16 @@ public class Door : MonoBehaviour
         if (!open)
         {
             locked = true;
+            graphics.enabled = true;
+            lock_collider.enabled = true;
         }
     }
 
     public void Unlock()
     {
         locked = false;
+        graphics.enabled = false;
+        lock_collider.enabled = false;
     }
 
     public void toggleOpen()

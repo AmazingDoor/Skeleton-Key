@@ -30,7 +30,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 break;
             case ItemType.Default: break;
             case ItemType.Weapon: break;
-            case ItemType.Tool: break;
+            case ItemType.Tool:
+                Tool tool = gameObject.AddComponent<Tool>();
+                tool.item = item;
+                break;
         }
         
     }
