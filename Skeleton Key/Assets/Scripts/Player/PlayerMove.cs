@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     NoiseHandler noise_handler;
 
     public Vector3 move;
+    public LayerMask ignore_layer;
     public Transform groundCheck;
     public float groundDistance = 0.01f;
     public LayerMask groundMask;
@@ -21,6 +22,8 @@ public class PlayerMove : MonoBehaviour
     public Canvas inventory;
     public Camera cam;
     public NewPlayerInventory inv;
+
+    public Doge dog;
 
     //Scriptable Object Items
     //Prefabs go to DropHandler
@@ -43,6 +46,7 @@ public class PlayerMove : MonoBehaviour
     {
         player = this.GetComponent<CharacterController>();
         noise_handler = GetComponent<NoiseHandler>();
+        dog = GameObject.Find("Dog").GetComponent<Doge>();
         
     }
 
@@ -76,12 +80,9 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-                RaycastHit[] hits;
-                hits = Physics.RaycastAll(ray, 10);
-                for (int num = 0; num < hits.Length; num++)
-                {
-                    RaycastHit hit = hits[num];
-
+                RaycastHit hit;
+                Physics.Raycast(ray,out hit, 10, ~ignore_layer);
+                Debug.Log(hit.transform.name);
                     if (hit.transform.tag == "bullet")
                     {
                         inv.addItem(revolver_bullet);
@@ -112,6 +113,10 @@ public class PlayerMove : MonoBehaviour
                     {
                         inv.addItem(shot_gun_shell);
                     }
+                    if (hit.transform.CompareTag("dirt_pile"))
+                    {
+                        dog.setMoveGoal(hit.transform.gameObject);
+                    }
 
 
                     if(hit.transform.CompareTag("door"))
@@ -123,8 +128,6 @@ public class PlayerMove : MonoBehaviour
                         }
                         
                     }
-                    
-                }
             }
         } 
         else
