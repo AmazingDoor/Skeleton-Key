@@ -34,6 +34,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 Tool tool = gameObject.AddComponent<Tool>();
                 tool.item = item;
                 break;
+            case ItemType.CrowBar:
+                CrowBar crowbar = gameObject.AddComponent<CrowBar>();
+                crowbar.item = item;
+                break;
         }
         
     }

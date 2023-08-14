@@ -16,6 +16,8 @@ TagManager:
   - lock
   - lock_on_door
   - dirt_pile
+  - crow_bar
+  - dog
   layers:
   - Default
   - TransparentFX

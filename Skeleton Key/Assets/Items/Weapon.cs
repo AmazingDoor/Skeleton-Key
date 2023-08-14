@@ -157,6 +157,9 @@ public class Weapon : ItemActionHandler
                 Door door = hit.transform.GetComponentInParent<Door>();
                 door.Unlock();
                 return true;
+            case "dog":
+                hit.transform.GetComponent<Doge>().hurt();
+                return true;
             default:
                 return false;
         }

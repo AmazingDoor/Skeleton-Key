@@ -33,6 +33,7 @@ public class PlayerMove : MonoBehaviour
     public Item lock_pick;
     public Item shot_gun_shell;
     public Item lock_item;
+    public Item crow_bar;
 
     public Canvas Hud;
     
@@ -115,7 +116,14 @@ public class PlayerMove : MonoBehaviour
                     }
                     if (hit.transform.CompareTag("dirt_pile"))
                     {
+                    if (dog != null)
+                    {
                         dog.setMoveGoal(hit.transform.gameObject);
+                    }
+                    }
+                    if(hit.transform.CompareTag("crow_bar"))
+                    {
+                        inv.addItem(crow_bar);
                     }
 
 

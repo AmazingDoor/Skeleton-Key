@@ -21,7 +21,6 @@ public class Item : ScriptableObject
     public GameObject graphic;
     [HideInInspector]
     public ItemActionHandler actionHandler;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +38,6 @@ public enum ItemType
     Default,
     Weapon,
     Lock,
-    Tool
+    Tool,
+    CrowBar
 }
