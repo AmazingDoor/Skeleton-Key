@@ -5,7 +5,9 @@ using System.Linq;
 
 public class ActionManager : MonoBehaviour
 {
+    [HideInInspector]
     public NewPlayerInventory inv;
+    [HideInInspector]
     public HotbarHandler hotbar;
     public Item bullet;
     public Item ShotGunShell;
@@ -30,7 +32,9 @@ public class ActionManager : MonoBehaviour
 
     void Start()
     {
+        inv = GameObject.Find("Inventory").GetComponentInChildren<NewPlayerInventory>();
         handler = GetComponentInParent<NoiseHandler>();
+        hotbar = GameObject.Find("Inventory").GetComponentInChildren<HotbarHandler>();
         
     }
 

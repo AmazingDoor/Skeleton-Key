@@ -354,6 +354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
+  ignore_layer:
+    serializedVersion: 2
+    m_Bits: 1024
   groundCheck: {fileID: 3478960220278368802}
   groundDistance: 0.4
   groundMask:
@@ -363,11 +366,14 @@ MonoBehaviour:
   inventory: {fileID: 0}
   cam: {fileID: 3478960219892590359}
   inv: {fileID: 0}
+  dog: {fileID: 0}
   revolver_bullet: {fileID: 11400000, guid: a2bd00269decbcd4bb02b481f7280891, type: 2}
   shot_gun: {fileID: 11400000, guid: 2b6aa053bd61e744886cd069d9d73f3f, type: 2}
   revolver: {fileID: 11400000, guid: e563ee487a4217e40bf700db2d40d966, type: 2}
   lock_pick: {fileID: 11400000, guid: 9e8caec5b03e51f44aad7c9ad25f3f37, type: 2}
   shot_gun_shell: {fileID: 11400000, guid: 1013238a17701554eaa1c6431060a22c, type: 2}
+  lock_item: {fileID: 0}
+  crow_bar: {fileID: 0}
   Hud: {fileID: 0}
 --- !u!114 &3478960220215220008
 MonoBehaviour:

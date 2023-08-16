@@ -10,7 +10,9 @@ public class BloomHandler : MonoBehaviour
     public Image Left;
     public Image Bottom;
     public Image Right;
+    [HideInInspector]
     public ActionManager action_manager;
+    [HideInInspector]
     public HotbarHandler hotbar;
 
     float max_bloom = 70;
@@ -22,6 +24,8 @@ public class BloomHandler : MonoBehaviour
     {
         target_bloom = min_bloom;
         current_bloom = min_bloom;   
+        action_manager = GameObject.Find("Player").GetComponentInChildren<ActionManager>();
+        hotbar = GameObject.Find("Inventory").GetComponentInChildren<HotbarHandler>();
     }
 
     // Update is called once per frame

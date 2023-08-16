@@ -18,6 +18,7 @@ TagManager:
   - dirt_pile
   - crow_bar
   - dog
+  - window
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     public bool is_grounded = false;
     public Canvas inventory;
     public Camera cam;
+    [HideInInspector]
     public NewPlayerInventory inv;
 
     public Doge dog;
@@ -45,9 +46,13 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        inv = GameObject.Find("Inventory").GetComponentInChildren<NewPlayerInventory>();
         player = this.GetComponent<CharacterController>();
         noise_handler = GetComponent<NoiseHandler>();
-        dog = GameObject.Find("Dog").GetComponent<Doge>();
+        if (GameObject.Find("Dog"))
+        {
+            dog = GameObject.Find("Dog").GetComponent<Doge>();
+        }
         
     }
 
@@ -62,8 +67,9 @@ public class PlayerMove : MonoBehaviour
 
         }
         
+       
 
-        
+
         handleMovement();
         if (!in_inventory)
         {
@@ -83,7 +89,6 @@ public class PlayerMove : MonoBehaviour
                 Ray ray = new Ray(cam.transform.position, cam.transform.forward);
                 RaycastHit hit;
                 Physics.Raycast(ray,out hit, 10, ~ignore_layer);
-                Debug.Log(hit.transform.name);
                     if (hit.transform.tag == "bullet")
                     {
                         inv.addItem(revolver_bullet);
@@ -184,8 +189,8 @@ public class PlayerMove : MonoBehaviour
                 noise_handler.createSound(2, false);
             }
         }
-
         move = transform.right * move_x * speed_modifier + transform.up * move.y + transform.forward * move_z * speed_modifier;
+        
 
 
         if (!in_inventory)
@@ -206,14 +211,67 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && is_grounded)
             {
-                move.y = jump_height;
+                Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 2, ~ignore_layer))
+                {
+                    if(hit.transform.CompareTag("window"))
+                    {
+                        vaultWindow(hit);
+                    }
+                }
+                else
+                {
+                    move.y = jump_height;
+                }
             }
             //end if not paused
         }
-        
 
-        move.y += gravity * Time.deltaTime;
-        player.Move(new Vector3(move.x * speed, move.y, move.z * speed) * Time.deltaTime);
+        if (player.enabled)
+        {
+            move.y += gravity * Time.deltaTime;
+            player.Move(new Vector3(move.x * speed, move.y, move.z * speed) * Time.deltaTime);
+        }
+    }
+
+    public void vaultWindow(RaycastHit hit)
+    {
+        Vector3 vault_loc;
+        transform.rotation = Quaternion.FromToRotation(-transform.forward, hit.normal) * transform.rotation;
+        player.enabled = false;
+        float player_rot_x = transform.TransformDirection(Vector3.forward).x;
+        float player_rot_z = transform.TransformDirection(Vector3.forward).z;
+
+        Debug.Log(player_rot_x);
+
+        if ((int) player_rot_x == 1 || (int) player_rot_x == -1)
+        {
+            vault_loc = new Vector3(hit.transform.position.x + player_rot_x, hit.transform.position.y + .5f, hit.transform.position.z - .5f);
+        }
+        else
+        {
+            vault_loc = new Vector3(hit.transform.position.x + .5f, hit.transform.position.y + .5f, hit.transform.position.z + player_rot_z);
+
+        }
+        StartCoroutine(finishVault(vault_loc));
+        
+    }
+
+    IEnumerator finishVault(Vector3 vault_loc)
+    {
+        float time = 0;
+        float duration = .4f;
+        Vector3 start_pos = transform.position;
+        while(time < duration)
+        {
+            transform.position = Vector3.Lerp(start_pos, vault_loc, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = vault_loc;
+        player.enabled = true;
+       // player.Move((transform.forward + transform.up) * 2);
     }
 
 
