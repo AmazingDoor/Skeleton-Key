@@ -14,8 +14,10 @@ public class Doge : MonoBehaviour
     bool wander_started;
     bool alive = true;
     int health = 1;
+    Vector3 sit_location;
     GameObject player;
     NoiseHandler handler;
+    Animator animator;
 
     int range = 5;
     void Start()
@@ -23,11 +25,20 @@ public class Doge : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
         handler = player.GetComponent<NoiseHandler>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("digging", diggin_started);
+        if((!stand_location_set || Vector3.Distance(gameObject.transform.position, sit_location) > 1) && !diggin_started)
+        {
+            animator.SetBool("walking", true);
+        } else
+        {
+            animator.SetBool("walking", false);
+        }
         
         if(health <= 0)
         {
@@ -85,6 +96,7 @@ public class Doge : MonoBehaviour
     void setStandLocation()
     {
         Vector3 newPos = new Vector3(player.transform.position.x + Random.Range(-range, range), player.transform.position.y, player.transform.position.z + Random.Range(-range, range));
+        sit_location = newPos;
         agent.SetDestination(newPos);
         stand_location_set = true;
     }
@@ -105,15 +117,17 @@ public class Doge : MonoBehaviour
 
     void handleDirtPile()
     {
-        if (Vector3.Distance(transform.position, dirt_pile.transform.position) < 2)
+        if (Vector3.Distance(transform.position, dirt_pile.transform.position) < 1)
         {
             if (digging)
             {
                 if (!diggin_started)
                 {
                     Dig(dirt_pile);
+                    transform.LookAt(dirt_pile.transform);
                 }
             }
+            stand_location_set = false;
             agent.SetDestination(transform.position);
         }
 
